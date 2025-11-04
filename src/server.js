@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const { handleIncomingMessage } = require('./controllers/messageController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,15 +31,23 @@ app.get('/webhook', (req, res) => {
 });
 
 // Webhook to receive messages
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
   console.log('Incoming webhook:', JSON.stringify(req.body, null, 2));
 
-  const message = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+  const entry = req.body.entry?.[0];
+  const changes = entry?.changes?.[0];
+  const value = changes?.value;
+  const message = value?.messages?.[0];
 
   if (message) {
-    console.log('Received message:', message);
+    try {
+      await handleIncomingMessage(message);
+    } catch (error) {
+      console.error('Error handling message:', error);
+    }
   }
 
+  // Always respond quickly to Meta
   res.sendStatus(200);
 });
 
