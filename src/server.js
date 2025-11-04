@@ -4,6 +4,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { handleIncomingMessage } = require('./controllers/messageController');
 
+// Debug: Log environment variables on startup
+console.log('=== Environment Variables Check ===');
+console.log('PORT:', process.env.PORT);
+console.log('VERIFY_TOKEN:', process.env.VERIFY_TOKEN ? 'SET' : 'NOT SET');
+console.log('META_ACCESS_TOKEN:', process.env.META_ACCESS_TOKEN ? `SET (${process.env.META_ACCESS_TOKEN.substring(0, 10)}...)` : 'NOT SET');
+console.log('META_PHONE_NUMBER_ID:', process.env.META_PHONE_NUMBER_ID ? 'SET' : 'NOT SET');
+console.log('DEFAULT_CLIENT_ID:', process.env.DEFAULT_CLIENT_ID ? 'SET' : 'NOT SET');
+console.log('WHATSAPP_API_VERSION:', process.env.WHATSAPP_API_VERSION);
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'SET' : 'NOT SET');
+console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? 'SET' : 'NOT SET');
+console.log('===================================');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
