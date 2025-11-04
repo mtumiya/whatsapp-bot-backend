@@ -28,12 +28,14 @@ async function sendWhatsAppMessage(to, messageText) {
 }
 
 async function sendMenuMessage(to) {
-  const menuText = `👋 Welcome! How can I help you today?
+  const menuText = `🏥 Welcome to Our Clinic!
 
-1️⃣ Book an appointment
-2️⃣ View our services
-3️⃣ Contact us
-4️⃣ Business hours
+How can we assist you today?
+
+1️⃣ Book an Appointment
+2️⃣ View Our Medical Services
+3️⃣ Contact Information
+4️⃣ Working Hours
 
 Reply with a number (1-4)`;
 
